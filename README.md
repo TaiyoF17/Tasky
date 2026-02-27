@@ -1,6 +1,6 @@
-# Pronto - Proyecto Programacion de sistemas moviles
+# tasky - Proyecto Programacion de sistemas moviles
 
-**Descripción:** Pronto es una plataforma móvil diseñada para conectar a personas que necesitan realizar tareas rápidas o mandados cortos con prestadores de servicios locales dispuestos a ayudar a cambio de un pago inmediato.
+**Descripción:** tasky es una plataforma móvil diseñada para conectar a personas que necesitan realizar tareas rápidas o mandados cortos con prestadores de servicios locales dispuestos a ayudar a cambio de un pago inmediato.
 
 ##  Integrantes
 Carlos Fernando Cervantes Lopez

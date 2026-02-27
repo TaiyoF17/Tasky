@@ -2,7 +2,7 @@
 
 **Descripción:** Pronto es una plataforma móvil diseñada para conectar a personas que necesitan realizar tareas rápidas o mandados cortos con prestadores de servicios locales dispuestos a ayudar a cambio de un pago inmediato.
 
-## 👥 Integrantes
+##  Integrantes
 Carlos Fernando Cervantes Lopez
 
 

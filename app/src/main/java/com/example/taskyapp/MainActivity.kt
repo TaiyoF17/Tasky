@@ -1,20 +1,28 @@
 package com.example.taskyapp
 
+import android.content.Intent
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import androidx.constraintlayout.widget.ConstraintLayout
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContentView(R.layout.activity_main)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+
+        // 1. Aquí le decimos a la Activity que muestre tu diseño del menú
+        setContentView(R.layout.select_user_tasker)
+
+        // 2. Buscamos la tarjeta "Solicitar tarea" por su ID
+        val cardSolicitar = findViewById<ConstraintLayout>(R.id.clRequestTaskCard)
+
+        // 3. Le decimos qué hacer cuando el usuario la toque
+        cardSolicitar.setOnClickListener {
+
+            // 4. Creamos la "intención" de viajar a la nueva pantalla que creaste
+            val intent = Intent(this, RequestTaskActivity::class.java)
+
+            // 5. ¡Iniciamos el viaje!
+            startActivity(intent)
         }
     }
 }

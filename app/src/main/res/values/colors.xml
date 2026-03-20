@@ -2,4 +2,6 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="tasky_blue_profile">#62A2E6</color> <color name="tasky_card_border_light">#A9D6E5</color> <color name="tasky_icon_border_dark">#2B6777</color> <color name="tasky_body_text_black">#000000</color> <color name="tasky_card_background_light">#F8FCFD</color>
 </resources>
+

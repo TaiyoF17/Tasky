@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:padding="24dp">
+
+    <!-- Contenedor principal con borde -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/main_border"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/border_only"
+        android:padding="16dp">
+
+        <!-- User Section -->
+        <ImageView
+            android:id="@+id/ivUserIcon"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/ic_user_placeholder"
+            android:contentDescription="Icono de usuario"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvUserLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:text="Usuario"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/ivUserIcon"
+            app:layout_constraintStart_toEndOf="@+id/ivUserIcon"
+            app:layout_constraintTop_toTopOf="@+id/ivUserIcon" />
+
+        <!-- Único ejemplo de Tarea para navegar al chat -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cardTareaExample"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/border_only"
+            android:padding="12dp"
+            android:clickable="true"
+            android:focusable="true"
+            app:layout_constraintTop_toBottomOf="@+id/ivUserIcon">
+
+            <TextView
+                android:id="@+id/tvTarea1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edit_text_background"
+                android:padding="8dp"
+                android:text="Tarea de ejemplo (Toca para chatear)"
+                android:textColor="@color/text_gray"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvDesc1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/edit_text_background"
+                android:padding="8dp"
+                android:minHeight="60dp"
+                android:text="Descripción de la tarea solicitada..."
+                android:textColor="@color/text_gray"
+                app:layout_constraintTop_toBottomOf="@+id/tvTarea1" />
+
+            <TextView
+                android:id="@+id/tvDir1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/edit_text_background"
+                android:padding="8dp"
+                android:text="Dirección de ejemplo"
+                android:textColor="@color/text_gray"
+                app:layout_constraintTop_toBottomOf="@+id/tvDesc1" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:padding="24dp">
+
+    <!-- Contenedor principal con borde -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/main_border"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/border_only"
+        android:padding="16dp">
+
+        <!-- User Section (Persona con la que hablas) -->
+        <ImageView
+            android:id="@+id/ivUserIcon"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/ic_user_placeholder"
+            android:contentDescription="Icono de usuario"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvUserLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:text="Usuario"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/ivUserIcon"
+            app:layout_constraintStart_toEndOf="@+id/ivUserIcon"
+            app:layout_constraintTop_toTopOf="@+id/ivUserIcon" />
+
+        <!-- Area de Chat (Vacía por ahora) -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/chatArea"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toTopOf="@+id/inputLayout"
+            app:layout_constraintTop_toBottomOf="@+id/ivUserIcon">
+
+            <!-- Ejemplo de burbuja de "escribiendo..." o mensaje -->
+            <ImageView
+                android:id="@+id/ivMeIcon"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_user_placeholder"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="..."
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="@color/primary_blue"
+                app:layout_constraintBottom_toBottomOf="@+id/ivMeIcon"
+                app:layout_constraintStart_toEndOf="@+id/ivMeIcon"
+                app:layout_constraintTop_toTopOf="@+id/ivMeIcon" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- Input de mensaje -->
+        <LinearLayout
+            android:id="@+id/inputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <EditText
+                android:id="@+id/etMessage"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/edit_text_background"
+                android:hint="Enviar mensaje"
+                android:padding="10dp"
+                android:textSize="14sp"
+                android:importantForAutofill="no"
+                android:inputType="text" />
+
+            <ImageView
+                android:id="@+id/btnSend"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="8dp"
+                android:padding="8dp"
+                android:src="@drawable/ic_send"
+                android:background="@drawable/card_background"
+                android:contentDescription="Enviar" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

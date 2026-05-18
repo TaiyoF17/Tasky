@@ -5,135 +5,177 @@
     android:id="@+id/rootContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F0F7FD"
     android:padding="24dp"
     tools:context=".MainActivity">
 
-    <ImageView
-        android:id="@+id/ivUserProfile"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:src="@drawable/ic_menu_camera"
-        app:tint="@color/tasky_blue_profile"
+    <!-- Botón de Cerrar Sesión -->
+    <ImageButton
+        android:id="@+id/btnLogout"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:src="@drawable/ic_logout"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:contentDescription="Cerrar Sesión" />
 
-    <TextView
-        android:id="@+id/tvUserName"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clUserInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:text="&quot;Usuario&quot;"
-        android:textColor="@color/tasky_body_text_black"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="@id/ivUserProfile"
-        app:layout_constraintBottom_toBottomOf="@id/ivUserProfile"
-        app:layout_constraintStart_toEndOf="@id/ivUserProfile" />
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cvUserSmall"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            app:cardCornerRadius="30dp"
+            app:cardElevation="0dp"
+            app:cardBackgroundColor="@android:color/transparent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/ivUserProfile"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_user"
+                app:tint="#3498DB" />
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/tvUserName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="Usuario"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/cvUserSmall"
+            app:layout_constraintStart_toEndOf="@id/cvUserSmall"
+            app:layout_constraintTop_toTopOf="@id/cvUserSmall" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- Solicitar Tarea -->
+    <androidx.cardview.widget.CardView
         android:id="@+id/clRequestTaskCard"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/shape_card_background"
-        android:padding="20dp"
-        app:layout_constraintTop_toBottomOf="@id/ivUserProfile"
-        app:layout_constraintBottom_toTopOf="@id/clPerformTaskCard"
-        app:layout_constraintStart_toStartOf="parent"
+        app:cardBackgroundColor="#FFFFFF"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="2dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintVertical_weight="1">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/clUserInfo">
 
-        <TextView
-            android:id="@+id/tvIconRequest"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:background="@drawable/shape_circular_icon_border"
-            android:gravity="center"
-            android:text="?"
-            android:textColor="@color/tasky_icon_border_dark"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-        <TextView
-            android:id="@+id/tvTitleRequest"
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Solicitar tarea"
-            android:textColor="@color/tasky_card_border_light"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            android:padding="24dp">
 
-        <TextView
-            android:id="@+id/tvBodyRequest"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:text="Solicita a gente por tu zona para realizar una tarea"
-            android:textColor="@color/tasky_body_text_black"
-            android:textSize="14sp"
-            app:layout_constraintTop_toBottomOf="@id/tvTitleRequest"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/tvIconRequest" />
+            <TextView
+                android:id="@+id/tvTitleRequest"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Solicitar tarea"
+                android:textColor="#3498DB"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/tvBodyRequest"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:text="Solicita a gente por tu zona para realizar una tarea"
+                android:textColor="#757575"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toStartOf="@+id/tvIconRequest"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvTitleRequest" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+            <TextView
+                android:id="@+id/tvIconRequest"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/shape_circular_icon_border"
+                android:gravity="center"
+                android:text="?"
+                android:textColor="#3498DB"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Realizar Tarea -->
+    <androidx.cardview.widget.CardView
         android:id="@+id/clPerformTaskCard"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="16dp"
-        android:background="@drawable/shape_card_background"
-        android:padding="20dp"
-        app:layout_constraintTop_toBottomOf="@id/clRequestTaskCard"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:cardBackgroundColor="#FFFFFF"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="2dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintVertical_weight="1">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/clRequestTaskCard">
 
-        <TextView
-            android:id="@+id/tvIconPerform"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:background="@drawable/shape_circular_icon_border"
-            android:gravity="center"
-            android:text="!"
-            android:textColor="@color/tasky_icon_border_dark"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-        <TextView
-            android:id="@+id/tvTitlePerform"
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Realizar tarea"
-            android:textColor="@color/tasky_card_border_light"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            android:padding="24dp">
 
-        <TextView
-            android:id="@+id/tvBodyPerform"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:text="Realiza trabajos para personas por tu zona"
-            android:textColor="@color/tasky_body_text_black"
-            android:textSize="14sp"
-            app:layout_constraintTop_toBottomOf="@id/tvTitlePerform"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/tvIconPerform" />
+            <TextView
+                android:id="@+id/tvTitlePerform"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Realizar tarea"
+                android:textColor="#3498DB"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/tvBodyPerform"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:text="Realiza trabajos para personas por tu zona"
+                android:textColor="#757575"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toStartOf="@+id/tvIconPerform"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvTitlePerform" />
+
+            <TextView
+                android:id="@+id/tvIconPerform"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/shape_circular_icon_border"
+                android:gravity="center"
+                android:text="!"
+                android:textColor="#3498DB"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

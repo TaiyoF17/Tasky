@@ -1,148 +1,198 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
     android:padding="16dp"
-    tools:context=".MainActivity">
+    tools:context=".RequestTaskActivity">
 
-    <ImageView
-        android:id="@+id/user_icon_placeholder"
+    <ImageButton
+        android:id="@+id/btnBack"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:src="@drawable/ic_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="Atrás" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvUserRequest"
         android:layout_width="64dp"
         android:layout_height="64dp"
-        android:contentDescription="Icono de perfil de usuario"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="16dp"
+        app:cardCornerRadius="32dp"
+        app:cardElevation="0dp"
+        app:cardBackgroundColor="@android:color/transparent"
         app:layout_constraintStart_toStartOf="parent"
-        android:background="@drawable/circle_placeholder_outline" />
+        app:layout_constraintTop_toBottomOf="@id/btnBack">
+
+        <ImageView
+            android:id="@+id/ivUserIcon"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_user"
+            app:tint="#3498DB" />
+    </androidx.cardview.widget.CardView>
 
     <TextView
-        android:id="@+id/user_name_text"
-        android:layout_width="0dp"
+        android:id="@+id/tvUserLabel"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="&quot;Usuario&quot;"
-        android:textSize="18sp"
-        android:textStyle="bold"
         android:layout_marginStart="16dp"
-        app:layout_constraintTop_toTopOf="@id/user_icon_placeholder"
-        app:layout_constraintBottom_toBottomOf="@id/user_icon_placeholder"
-        app:layout_constraintStart_toEndOf="@id/user_icon_placeholder"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:text="Usuario"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/cvUserRequest"
+        app:layout_constraintStart_toEndOf="@id/cvUserRequest"
+        app:layout_constraintTop_toTopOf="@id/cvUserRequest" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/main_content_container"
+    <androidx.cardview.widget.CardView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:layout_marginBottom="16dp"
-        android:background="@drawable/inner_blue_box"
-        android:padding="24dp"
-        app:layout_constraintTop_toBottomOf="@id/user_icon_placeholder"
+        app:cardBackgroundColor="#F0F7FD"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/cvUserRequest">
 
-        <TextView
-            android:id="@+id/label_tarea"
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Tarea:"
-            android:textStyle="bold"
-            android:textSize="16sp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            android:padding="20dp">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/text_input_layout_tarea"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            app:layout_constraintTop_toTopOf="@id/label_tarea"
-            app:layout_constraintBottom_toBottomOf="@id/label_tarea"
-            app:layout_constraintStart_toEndOf="@id/label_tarea"
-            app:layout_constraintEnd_toEndOf="parent">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
+            <!-- Tarea -->
+            <TextView
+                android:id="@+id/label_tarea"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="ingrese la tarea a solicitar"
-                android:singleLine="true"/>
-        </com.google.android.material.textfield.TextInputLayout>
+                android:text="Tarea:"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/etTarea"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/etTarea" />
 
-        <TextView
-            android:id="@+id/label_descripcion"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Descripción:"
-            android:textStyle="bold"
-            android:textSize="16sp"
-            android:layout_marginTop="24dp"
-            app:layout_constraintTop_toBottomOf="@id/text_input_layout_tarea"
-            app:layout_constraintStart_toStartOf="parent" />
+            <EditText
+                android:id="@+id/etTarea"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:background="@android:drawable/editbox_background"
+                android:hint="Ingrese la tarea a solicitar"
+                android:padding="10dp"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/label_tarea"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/text_input_layout_descripcion"
-            android:layout_width="0dp"
-            android:layout_height="150dp"
-            android:layout_marginStart="8dp"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            app:layout_constraintTop_toTopOf="@id/label_descripcion"
-            app:layout_constraintStart_toEndOf="@id/label_descripcion"
-            app:layout_constraintEnd_toEndOf="parent">
+            <!-- Descripción -->
+            <TextView
+                android:id="@+id/label_descripcion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Descripción:"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/etTarea" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+            <EditText
+                android:id="@+id/etDescripcion"
+                android:layout_width="0dp"
+                android:layout_height="120dp"
+                android:layout_marginTop="8dp"
+                android:background="@android:drawable/editbox_background"
+                android:gravity="top"
                 android:hint="describa detalles de la tarea"
-                android:gravity="top|start"
-                android:inputType="textMultiLine"
-                android:paddingTop="8dp"/>
-        </com.google.android.material.textfield.TextInputLayout>
+                android:padding="10dp"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/label_descripcion" />
 
-        <TextView
-            android:id="@+id/label_direccion"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Dirección:"
-            android:textStyle="bold"
-            android:textSize="16sp"
-            android:layout_marginTop="24dp"
-            app:layout_constraintTop_toBottomOf="@id/text_input_layout_descripcion"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/text_input_layout_direccion"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            app:layout_constraintTop_toTopOf="@id/label_direccion"
-            app:layout_constraintBottom_toBottomOf="@id/label_direccion"
-            app:layout_constraintStart_toEndOf="@id/label_direccion"
-            app:layout_constraintEnd_toEndOf="parent">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
+            <!-- Dirección -->
+            <TextView
+                android:id="@+id/label_direccion"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Dirección:"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/etDireccion"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/etDescripcion"
+                app:layout_constraintTop_toTopOf="@id/etDireccion" />
+
+            <EditText
+                android:id="@+id/etDireccion"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="16dp"
+                android:background="@android:drawable/editbox_background"
                 android:hint="ingrese la dirección"
-                android:singleLine="true"/>
-        </com.google.android.material.textfield.TextInputLayout>
+                android:padding="10dp"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/label_direccion"
+                app:layout_constraintTop_toBottomOf="@id/etDescripcion" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/button_solicitar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Solicitar"
-            android:textAllCaps="false"
-            android:backgroundTint="#607D8B"
-            android:textColor="#FFFFFF"
-            android:layout_marginTop="32dp"
-            app:layout_constraintTop_toBottomOf="@id/text_input_layout_direccion"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            <!-- Pago -->
+            <TextView
+                android:id="@+id/label_pago"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Pago ($):"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/etPago"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/etDireccion"
+                app:layout_constraintTop_toTopOf="@id/etPago" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <EditText
+                android:id="@+id/etPago"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="16dp"
+                android:background="@android:drawable/editbox_background"
+                android:hint="0.00"
+                android:inputType="numberDecimal"
+                android:padding="10dp"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/label_pago"
+                app:layout_constraintTop_toBottomOf="@id/etDireccion" />
+
+            <!-- Botón Solicitar -->
+            <android.widget.Button
+                android:id="@+id/button_solicitar"
+                android:layout_width="wrap_content"
+                android:layout_height="56dp"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/shape_button_rounded"
+                android:paddingStart="32dp"
+                android:paddingEnd="32dp"
+                android:text="Solicitar"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/etPago" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

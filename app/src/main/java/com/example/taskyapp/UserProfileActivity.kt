@@ -113,9 +113,16 @@ class UserProfileActivity : AppCompatActivity() {
 
         try {
             val userTasks = db.getUserTasks(currentUser)
-            adapter = TaskAdapter(userTasks, showCancelButton = true) { task ->
-                cancelTask(task)
-            }
+            adapter = TaskAdapter(
+                userTasks,
+                showCancelButton = true,
+                onCancelClick = { task ->
+                    cancelTask(task)
+                },
+                onCompleteClick = { task ->
+                    cancelTask(task) // En este contexto, completar es igual a eliminar de la lista
+                }
+            )
             rvHistory.adapter = adapter
         } catch (e: Exception) {
             Log.e("UserProfile", "Error loading tasks", e)

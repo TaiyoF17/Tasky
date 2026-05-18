@@ -46,6 +46,7 @@ class MainActivity : AppCompatActivity() {
 
         val cardSolicitar = findViewById<CardView>(R.id.clRequestTaskCard)
         val cardRealizar = findViewById<CardView>(R.id.clPerformTaskCard)
+        val cardMessages = findViewById<CardView>(R.id.clMessagesCard)
         val btnLogout = findViewById<ImageButton>(R.id.btnLogout)
 
         cardSolicitar.setOnClickListener {
@@ -56,6 +57,12 @@ class MainActivity : AppCompatActivity() {
 
         cardRealizar.setOnClickListener {
             val intent = Intent(this, TaskListActivity::class.java)
+            startActivity(intent)
+        }
+
+        cardMessages.setOnClickListener {
+            val intent = Intent(this, ChatListActivity::class.java)
+            intent.putExtra("USERNAME", username)
             startActivity(intent)
         }
 

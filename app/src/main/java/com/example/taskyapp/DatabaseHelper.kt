@@ -11,7 +11,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
     companion object {
         private const val TAG = "DatabaseHelper"
         private const val DATABASE_NAME = "tasky_v6.db"
-        private const val DATABASE_VERSION = 1
+        private const val DATABASE_VERSION = 2
 
         // Tabla Usuarios
         const val TABLE_USERS = "users"
@@ -28,6 +28,14 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         const val COLUMN_TASK_ADDRESS = "address"
         const val COLUMN_TASK_PAYMENT = "payment"
         const val COLUMN_TASK_USER = "created_by"
+
+        // Tabla Mensajes
+        const val TABLE_MESSAGES = "messages"
+        const val COLUMN_MESSAGE_ID = "id"
+        const val COLUMN_MESSAGE_SENDER = "sender"
+        const val COLUMN_MESSAGE_RECEIVER = "receiver"
+        const val COLUMN_MESSAGE_TEXT = "message"
+        const val COLUMN_MESSAGE_TIMESTAMP = "timestamp"
     }
 
     override fun onCreate(db: SQLiteDatabase) {
@@ -48,12 +56,22 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
                 "$COLUMN_TASK_USER TEXT, " +
                 "FOREIGN KEY($COLUMN_TASK_USER) REFERENCES $TABLE_USERS($COLUMN_USER_NAME))")
         db.execSQL(createTasksTable)
+
+        val createMessagesTable = ("CREATE TABLE $TABLE_MESSAGES (" +
+                "$COLUMN_MESSAGE_ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "$COLUMN_MESSAGE_SENDER TEXT, " +
+                "$COLUMN_MESSAGE_RECEIVER TEXT, " +
+                "$COLUMN_MESSAGE_TEXT TEXT, " +
+                "$COLUMN_MESSAGE_TIMESTAMP DATETIME DEFAULT CURRENT_TIMESTAMP)")
+        db.execSQL(createMessagesTable)
+
         Log.d(TAG, "Tables created successfully with Foreign Key.")
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
         db.execSQL("DROP TABLE IF EXISTS $TABLE_USERS")
         db.execSQL("DROP TABLE IF EXISTS $TABLE_TASKS")
+        db.execSQL("DROP TABLE IF EXISTS $TABLE_MESSAGES")
         onCreate(db)
     }
 
@@ -154,5 +172,60 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
     fun deleteTask(taskId: Int): Int {
         val db = this.writableDatabase
         return db.delete(TABLE_TASKS, "$COLUMN_TASK_ID=?", arrayOf(taskId.toString()))
+    }
+
+    // Funciones para Mensajes
+    fun insertMessage(sender: String, receiver: String, text: String): Long {
+        val db = this.writableDatabase
+        val values = ContentValues()
+        values.put(COLUMN_MESSAGE_SENDER, sender)
+        values.put(COLUMN_MESSAGE_RECEIVER, receiver)
+        values.put(COLUMN_MESSAGE_TEXT, text)
+        return db.insert(TABLE_MESSAGES, null, values)
+    }
+
+    fun getMessages(user1: String, user2: String): MutableList<Message> {
+        val messages = mutableListOf<Message>()
+        val db = this.readableDatabase
+        val cursor = db.rawQuery(
+            "SELECT * FROM $TABLE_MESSAGES WHERE " +
+                    "($COLUMN_MESSAGE_SENDER=? AND $COLUMN_MESSAGE_RECEIVER=?) OR " +
+                    "($COLUMN_MESSAGE_SENDER=? AND $COLUMN_MESSAGE_RECEIVER=?) " +
+                    "ORDER BY $COLUMN_MESSAGE_TIMESTAMP ASC",
+            arrayOf(user1, user2, user2, user1)
+        )
+        if (cursor.moveToFirst()) {
+            do {
+                val sender = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_MESSAGE_SENDER))
+                val receiver = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_MESSAGE_RECEIVER))
+                val text = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_MESSAGE_TEXT))
+                val timestamp = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_MESSAGE_TIMESTAMP))
+                messages.add(Message(sender, receiver, text, timestamp))
+            } while (cursor.moveToNext())
+        }
+        cursor.close()
+        return messages
+    }
+
+    data class Message(val sender: String, val receiver: String, val text: String, val timestamp: String)
+
+    fun getUserChatPartners(username: String): List<String> {
+        val partners = mutableSetOf<String>()
+        val db = this.readableDatabase
+        val cursor = db.rawQuery(
+            "SELECT DISTINCT $COLUMN_MESSAGE_SENDER, $COLUMN_MESSAGE_RECEIVER FROM $TABLE_MESSAGES " +
+                    "WHERE $COLUMN_MESSAGE_SENDER=? OR $COLUMN_MESSAGE_RECEIVER=?",
+            arrayOf(username, username)
+        )
+        if (cursor.moveToFirst()) {
+            do {
+                val sender = cursor.getString(0)
+                val receiver = cursor.getString(1)
+                if (sender != username) partners.add(sender)
+                if (receiver != username) partners.add(receiver)
+            } while (cursor.moveToNext())
+        }
+        cursor.close()
+        return partners.toList()
     }
 }

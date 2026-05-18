@@ -1,0 +1,72 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="100dp"
+    android:height="100dp"
+    android:viewportWidth="100"
+    android:viewportHeight="100">
+
+    <!-- Background Blue -->
+    <path
+        android:fillColor="#62ABFD"
+        android:pathData="M0,0h100v100h-100z" />
+
+    <group
+        android:translateX="2"
+        android:translateY="2"
+        android:rotation="5"
+        android:pivotX="50"
+        android:pivotY="50">
+
+        <!-- Clipboard Board (Tan/Brown) -->
+        <path
+            android:fillColor="#D2B48C"
+            android:strokeColor="#1B1109"
+            android:strokeWidth="2.5"
+            android:strokeLineJoin="round"
+            android:pathData="M20,20 L75,15 L85,80 L30,85 Z" />
+
+        <!-- Paper (White) -->
+        <path
+            android:fillColor="#FFFFFF"
+            android:strokeColor="#1B1109"
+            android:strokeWidth="1.5"
+            android:strokeLineJoin="round"
+            android:pathData="M28,30 L68,26 L75,75 L35,78 Z" />
+
+        <!-- Clip (Dark) -->
+        <path
+            android:fillColor="#1B1109"
+            android:pathData="M38,10 C38,6 60,3 60,10 L65,25 L32,28 Z" />
+
+        <!-- Lines on Paper -->
+        <path
+            android:strokeColor="#1B1109"
+            android:strokeWidth="1.5"
+            android:strokeLineCap="round"
+            android:pathData="M45,40 C47,38 58,43 65,38 M40,52 C43,50 58,55 65,49 M40,65 C43,63 58,68 65,62" />
+
+        <!-- Checkboxes -->
+        <path
+            android:strokeColor="#1B1109"
+            android:strokeWidth="1.5"
+            android:strokeLineJoin="round"
+            android:pathData="M35,38 L41,38 L41,44 L35,44 Z" />
+        <path
+            android:strokeColor="#1B1109"
+            android:strokeWidth="1.5"
+            android:strokeLineJoin="round"
+            android:pathData="M35,50 L41,50 L41,56 L35,56 Z" />
+        <path
+            android:strokeColor="#1B1109"
+            android:strokeWidth="1.5"
+            android:strokeLineJoin="round"
+            android:pathData="M35,62 L41,62 L41,68 L35,68 Z" />
+
+        <!-- Green Checkmark -->
+        <path
+            android:strokeColor="#2E7D32"
+            android:strokeWidth="2.5"
+            android:strokeLineCap="round"
+            android:strokeLineJoin="round"
+            android:pathData="M33,40 L37,44 L43,34" />
+    </group>
+</vector>

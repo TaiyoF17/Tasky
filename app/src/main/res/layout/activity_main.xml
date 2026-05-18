@@ -111,7 +111,7 @@
                 android:layout_marginTop="8dp"
                 android:background="@android:drawable/editbox_background"
                 android:gravity="top"
-                android:hint="describa detalles de la tarea"
+                android:hint="Describa detalles de la tarea"
                 android:padding="10dp"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -132,21 +132,22 @@
                 app:layout_constraintTop_toBottomOf="@id/etDescripcion"
                 app:layout_constraintTop_toTopOf="@id/etDireccion" />
 
+            <!-- Pago -->
             <EditText
                 android:id="@+id/etDireccion"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="20dp"
                 android:background="@android:drawable/editbox_background"
                 android:hint="ingrese la dirección"
                 android:padding="10dp"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toEndOf="@id/label_direccion"
                 app:layout_constraintTop_toBottomOf="@id/etDescripcion" />
 
-            <!-- Pago -->
             <TextView
                 android:id="@+id/label_pago"
                 android:layout_width="wrap_content"

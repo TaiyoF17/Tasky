@@ -10,7 +10,9 @@ import androidx.recyclerview.widget.RecyclerView
 class TaskAdapter(
     private val tasks: MutableList<Task>,
     private val showCancelButton: Boolean = false,
-    private val onCancelClick: ((Task) -> Unit)? = null
+    private val onCancelClick: ((Task) -> Unit)? = null,
+    private val onCompleteClick: ((Task) -> Unit)? = null,
+    private val onItemClick: ((Task) -> Unit)? = null
 ) : RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
 
     data class Task(
@@ -29,6 +31,7 @@ class TaskAdapter(
         val tvPayment: TextView = view.findViewById(R.id.tvTaskPayment)
         val tvRequester: TextView = view.findViewById(R.id.tvTaskRequester) // Nuevo TextView en item_task.xml
         val btnCancel: Button = view.findViewById(R.id.btnCancelTask)
+        val btnComplete: Button = view.findViewById(R.id.btnCompleteTask)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
@@ -57,6 +60,14 @@ class TaskAdapter(
             }
         } else {
             holder.btnCancel.visibility = View.GONE
+        }
+
+        holder.btnComplete.setOnClickListener {
+            onCompleteClick?.invoke(task)
+        }
+
+        holder.itemView.setOnClickListener {
+            onItemClick?.invoke(task)
         }
     }
 

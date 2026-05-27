@@ -26,11 +26,11 @@ class ChatListActivity : AppCompatActivity() {
         val toolbar = findViewById<Toolbar>(R.id.toolbarChatList)
         setSupportActionBar(toolbar)
         
-        // Configurar icono de navegación y pintarlo de blanco
+        // Configurar icono de navegación y pintarlo de azul
         val navIcon = androidx.core.content.ContextCompat.getDrawable(this, R.drawable.ic_back)
         navIcon?.let {
             val wrappedDrawable = androidx.core.graphics.drawable.DrawableCompat.wrap(it)
-            androidx.core.graphics.drawable.DrawableCompat.setTint(wrappedDrawable, android.graphics.Color.WHITE)
+            androidx.core.graphics.drawable.DrawableCompat.setTint(wrappedDrawable, androidx.core.content.ContextCompat.getColor(this, R.color.tasky_blue))
             toolbar.navigationIcon = wrappedDrawable
         }
 
@@ -39,7 +39,7 @@ class ChatListActivity : AppCompatActivity() {
         val rvChatPartners = findViewById<RecyclerView>(R.id.rvChatPartners)
         rvChatPartners.layoutManager = LinearLayoutManager(this)
 
-        val partners = db.getUserChatPartners(currentUser)
+        val partners = db.getUserChatPartners(currentUser).toMutableList()
         rvChatPartners.adapter = ChatPartnerAdapter(partners) { partner ->
             val intent = Intent(this, ChatActivity::class.java)
             intent.putExtra("CURRENT_USER", currentUser)
@@ -49,12 +49,13 @@ class ChatListActivity : AppCompatActivity() {
     }
 
     inner class ChatPartnerAdapter(
-        private val partners: List<String>,
+        private var partners: MutableList<String>,
         private val onClick: (String) -> Unit
     ) : RecyclerView.Adapter<ChatPartnerAdapter.PartnerViewHolder>() {
 
         inner class PartnerViewHolder(view: View) : RecyclerView.ViewHolder(view) {
             val tvName: TextView = view.findViewById(R.id.tvPartnerName)
+            val btnDelete: android.widget.ImageButton = view.findViewById(R.id.btnDeleteChat)
         }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PartnerViewHolder {
@@ -66,6 +67,20 @@ class ChatListActivity : AppCompatActivity() {
             val partner = partners[position]
             holder.tvName.text = partner
             holder.itemView.setOnClickListener { onClick(partner) }
+            
+            holder.btnDelete.setOnClickListener {
+                androidx.appcompat.app.AlertDialog.Builder(this@ChatListActivity)
+                    .setTitle("Borrar conversación")
+                    .setMessage("¿Estás seguro de que deseas borrar todos los mensajes con $partner?")
+                    .setPositiveButton("Borrar") { _, _ ->
+                        db.deleteConversation(currentUser, partner)
+                        partners.removeAt(position)
+                        notifyItemRemoved(position)
+                        notifyItemRangeChanged(position, partners.size)
+                    }
+                    .setNegativeButton("Cancelar", null)
+                    .show()
+            }
         }
 
         override fun getItemCount() = partners.size

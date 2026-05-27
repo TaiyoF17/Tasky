@@ -207,6 +207,13 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         return messages
     }
 
+    fun deleteConversation(user1: String, user2: String): Int {
+        val db = this.writableDatabase
+        return db.delete(TABLE_MESSAGES, 
+            "($COLUMN_MESSAGE_SENDER = ? AND $COLUMN_MESSAGE_RECEIVER = ?) OR ($COLUMN_MESSAGE_SENDER = ? AND $COLUMN_MESSAGE_RECEIVER = ?)", 
+            arrayOf(user1, user2, user2, user1))
+    }
+
     data class Message(val sender: String, val receiver: String, val text: String, val timestamp: String)
 
     fun getUserChatPartners(username: String): List<String> {

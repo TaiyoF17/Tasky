@@ -27,11 +27,11 @@ class ChatActivity : AppCompatActivity() {
         toolbar.title = "Chat con $otherUser"
         setSupportActionBar(toolbar)
         
-        // Configurar icono de navegación y pintarlo de blanco
+        // Configurar icono de navegación y pintarlo de azul
         val navIcon = androidx.core.content.ContextCompat.getDrawable(this, R.drawable.ic_back)
         navIcon?.let {
             val wrappedDrawable = androidx.core.graphics.drawable.DrawableCompat.wrap(it)
-            androidx.core.graphics.drawable.DrawableCompat.setTint(wrappedDrawable, android.graphics.Color.WHITE)
+            androidx.core.graphics.drawable.DrawableCompat.setTint(wrappedDrawable, androidx.core.content.ContextCompat.getColor(this, R.color.tasky_blue))
             toolbar.navigationIcon = wrappedDrawable
         }
 

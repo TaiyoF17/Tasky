@@ -18,7 +18,8 @@ class RegistroActivity : AppCompatActivity() {
 
         db = DatabaseHelper(this)
 
-        val etEmail = findViewById<EditText>(R.id.etEmailRegistro)
+        val etUsuario = findViewById<EditText>(R.id.etNombreRegistro)
+        val etCorreo = findViewById<EditText>(R.id.etEmailRegistro)
         val etPass = findViewById<EditText>(R.id.etPasswordRegistro)
         val btnBack = findViewById<ImageButton>(R.id.btnBackRegistro)
         val btnRegistrarse = findViewById<MaterialButton>(R.id.btnRegistrarse)
@@ -28,16 +29,17 @@ class RegistroActivity : AppCompatActivity() {
         }
 
         btnRegistrarse.setOnClickListener {
-            val user = etEmail.text.toString().trim()
+            val usuario = etUsuario.text.toString().trim()
+            val correo = etCorreo.text.toString().trim()
             val pass = etPass.text.toString().trim()
 
-            if (user.isEmpty() || pass.isEmpty()) {
+            if (usuario.isEmpty() || correo.isEmpty() || pass.isEmpty()) {
                 Toast.makeText(this, getString(R.string.error_empty_fields), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
-            if (!Patterns.EMAIL_ADDRESS.matcher(user).matches()) {
-                Toast.makeText(this, getString(R.string.error_invalid_email), Toast.LENGTH_SHORT).show()
+            if (!correo.contains("@")) {
+                Toast.makeText(this, "El correo debe contener un '@'", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
@@ -46,7 +48,7 @@ class RegistroActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            val id = db.registerUser(user, pass)
+            val id = db.registerUser(usuario, pass)
             if (id != -1L) {
                 Toast.makeText(this, getString(R.string.registration_success), Toast.LENGTH_SHORT).show()
                 finish()

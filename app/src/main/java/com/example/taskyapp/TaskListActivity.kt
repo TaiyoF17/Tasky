@@ -1,7 +1,9 @@
 package com.example.taskyapp
 
 import android.os.Bundle
+import android.view.View
 import android.widget.ImageButton
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -10,6 +12,7 @@ class TaskListActivity : AppCompatActivity() {
     
     private lateinit var db: DatabaseHelper
     private lateinit var recyclerView: RecyclerView
+    private lateinit var tvEmptyState: TextView
     private lateinit var adapter: TaskAdapter
     private var currentUser: String? = null
 
@@ -28,14 +31,28 @@ class TaskListActivity : AppCompatActivity() {
         }
 
         recyclerView = findViewById(R.id.rvTasks)
+        tvEmptyState = findViewById(R.id.tvEmptyState)
         recyclerView.layoutManager = LinearLayoutManager(this)
         
         val tasks = db.getAllTasks()
+        
+        if (tasks.isEmpty()) {
+            tvEmptyState.visibility = View.VISIBLE
+            recyclerView.visibility = View.GONE
+        } else {
+            tvEmptyState.visibility = View.GONE
+            recyclerView.visibility = View.VISIBLE
+        }
+
         adapter = TaskAdapter(
             tasks,
             onCompleteClick = { task ->
                 db.deleteTask(task.id)
                 adapter.removeTask(task)
+                if (adapter.itemCount == 0) {
+                    tvEmptyState.visibility = View.VISIBLE
+                    recyclerView.visibility = View.GONE
+                }
             },
             onItemClick = { task ->
                 if (currentUser != null && task.requester != null && currentUser != task.requester) {

@@ -1,3 +1,20 @@
 <resources>
     <string name="app_name">TaskyApp</string>
+    <string name="login_title">Tasky Login</string>
+    <string name="user_hint">Usuario (Email)</string>
+    <string name="password_hint">Contraseña</string>
+    <string name="login_button">Iniciar Sesión</string>
+    <string name="go_to_register">¿No tienes cuenta? Regístrate aquí</string>
+    <string name="error_empty_fields">Por favor, completa todos los campos</string>
+    <string name="error_invalid_credentials">Usuario o contraseña incorrectos</string>
+    <string name="error_invalid_email">Formato de correo no válido</string>
+    <string name="error_short_password">La contraseña debe tener al menos 6 caracteres</string>
+    <string name="registration_success">Registro exitoso</string>
+    <string name="registration_error">Error al registrar usuario. Intente con otro nombre.</string>
+    <string name="task_requested_success">Tarea solicitada con éxito</string>
+    <string name="task_save_error">Error al guardar la tarea</string>
+    <string name="empty_tasks">No hay tareas disponibles en este momento</string>
+    <string name="profile_updated">Foto de perfil actualizada</string>
+    <string name="task_cancelled">Tarea cancelada</string>
+    <string name="logout_confirm">Sesión cerrada</string>
 </resources>

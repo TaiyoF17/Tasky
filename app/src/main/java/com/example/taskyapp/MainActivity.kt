@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 
@@ -70,6 +71,8 @@ class MainActivity : AppCompatActivity() {
             // Borrar sesión
             val sharedPrefs = getSharedPreferences("TaskyPrefs", MODE_PRIVATE)
             sharedPrefs.edit().remove("ACTIVE_USER").apply()
+            
+            Toast.makeText(this, getString(R.string.logout_confirm), Toast.LENGTH_SHORT).show()
 
             val intent = Intent(this, LoginActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK

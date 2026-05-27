@@ -1,6 +1,7 @@
 package com.example.taskyapp
 
 import android.os.Bundle
+import android.util.Patterns
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.Toast
@@ -27,19 +28,30 @@ class RegistroActivity : AppCompatActivity() {
         }
 
         btnRegistrarse.setOnClickListener {
-            val user = etEmail.text.toString()
-            val pass = etPass.text.toString()
+            val user = etEmail.text.toString().trim()
+            val pass = etPass.text.toString().trim()
 
-            if (user.isNotEmpty() && pass.isNotEmpty()) {
-                val id = db.registerUser(user, pass)
-                if (id != -1L) {
-                    Toast.makeText(this, "Registro exitoso", Toast.LENGTH_SHORT).show()
-                    finish()
-                } else {
-                    Toast.makeText(this, "Error al registrar usuario", Toast.LENGTH_SHORT).show()
-                }
+            if (user.isEmpty() || pass.isEmpty()) {
+                Toast.makeText(this, getString(R.string.error_empty_fields), Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            if (!Patterns.EMAIL_ADDRESS.matcher(user).matches()) {
+                Toast.makeText(this, getString(R.string.error_invalid_email), Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            if (pass.length < 6) {
+                Toast.makeText(this, getString(R.string.error_short_password), Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            val id = db.registerUser(user, pass)
+            if (id != -1L) {
+                Toast.makeText(this, getString(R.string.registration_success), Toast.LENGTH_SHORT).show()
+                finish()
             } else {
-                Toast.makeText(this, "Por favor, completa todos los campos", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.registration_error), Toast.LENGTH_SHORT).show()
             }
         }
     }

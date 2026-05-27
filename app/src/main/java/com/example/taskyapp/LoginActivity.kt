@@ -37,8 +37,8 @@ class LoginActivity : AppCompatActivity() {
         val tvGoToRegistro = findViewById<TextView>(R.id.tvGoToRegistro)
 
         btnLogin.setOnClickListener {
-            val user = etUser.text.toString()
-            val pass = etPassword.text.toString()
+            val user = etUser.text.toString().trim()
+            val pass = etPassword.text.toString().trim()
 
             if (user.isNotEmpty() && pass.isNotEmpty()) {
                 if (db.checkUser(user, pass)) {
@@ -51,10 +51,10 @@ class LoginActivity : AppCompatActivity() {
                     startActivity(intent)
                     finish()
                 } else {
-                    Toast.makeText(this, "Credenciales incorrectas", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, getString(R.string.error_invalid_credentials), Toast.LENGTH_SHORT).show()
                 }
             } else {
-                Toast.makeText(this, "Por favor, ingresa usuario y contraseña", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.error_empty_fields), Toast.LENGTH_SHORT).show()
             }
         }
 

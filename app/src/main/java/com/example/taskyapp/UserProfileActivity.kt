@@ -36,7 +36,7 @@ class UserProfileActivity : AppCompatActivity() {
                         ivProfile.imageTintList = null // Quitar el tinte gris del placeholder
                         val blob = bitmapToByteArray(bitmap)
                         db.updateUserPhoto(currentUser, blob)
-                        Toast.makeText(this, "Foto de perfil actualizada", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, getString(R.string.profile_updated), Toast.LENGTH_SHORT).show()
                     }
                 } catch (e: Exception) {
                     Log.e("UserProfile", "Error processing image", e)
@@ -134,7 +134,7 @@ class UserProfileActivity : AppCompatActivity() {
         val deletedRows = db.deleteTask(task.id)
         if (deletedRows > 0) {
             adapter.removeTask(task)
-            Toast.makeText(this, "Tarea cancelada", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.task_cancelled), Toast.LENGTH_SHORT).show()
         } else {
             Toast.makeText(this, "Error al cancelar la tarea", Toast.LENGTH_SHORT).show()
         }

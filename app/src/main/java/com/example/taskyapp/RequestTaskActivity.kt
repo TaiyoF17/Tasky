@@ -58,13 +58,13 @@ class RequestTaskActivity : AppCompatActivity() {
                 val pago = pagoStr.toDoubleOrNull() ?: 0.0
                 val id = db.insertTask(tarea, descripcion, direccion, pago, currentUser)
                 if (id != -1L) {
-                    Toast.makeText(this, "Tarea solicitada con éxito", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, getString(R.string.task_requested_success), Toast.LENGTH_SHORT).show()
                     finish()
                 } else {
-                    Toast.makeText(this, "Error al guardar la tarea", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, getString(R.string.task_save_error), Toast.LENGTH_SHORT).show()
                 }
             } else {
-                Toast.makeText(this, "Por favor, completa todos los campos", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.error_empty_fields), Toast.LENGTH_SHORT).show()
             }
         }
     }
